@@ -1,1 +1,67 @@
+name: EARU EAYCBM-T energy meter
+products:
+  - id: ine4hhapkgxonij1
+primary_entity:
+  entity: switch
+  name: Circuit breaker
+  dps:
+    - id: 16
+      name: switch
+      type: boolean
+    - id: 17
+      name: alarm_set_1
+      optional: true
+      type: string
+    - id: 18
+      name: alarm_set_2
+      optional: true
+      type: string
+secondary_entities:
+  - entity: sensor
+    name: Total Energy
+    icon: "mdi:lightning-bolt"
+    dps:
+      - id: 1
+        type: integer
+        name: sensor
+        unit: kWh
+        class: measurement
+        mapping:
+          - scale: 100
+  - entity: sensor
+    name: Voltage A
+    class: voltage
+    dps:
+      - id: 6
+        type: base64
+        name: sensor
+        optional: true
+        unit: V
+        mapping:
+          - mask: "FFFF000000000000"
+            scale: 10
+  - entity: sensor
+    name: Current A
+    class: current
+    dps:
+      - id: 6
+        type: base64
+        name: sensor
+        optional: true
+        unit: A
+        mapping:
+          - mask: "0000FFFFFF000000"
+            scale: 1000
+  - entity: sensor
+    name: Power A
+    class: power
+    dps:
+      - id: 6
+        type: base64
+        name: sensor
+        optional: true
+        unit: kW
+        mapping:
+          - mask: "0000000000FFFFFF"
+            scale: 1000
 
